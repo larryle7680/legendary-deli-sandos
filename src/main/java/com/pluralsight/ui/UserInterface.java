@@ -1,8 +1,10 @@
 package com.pluralsight.ui;
 
 //Import the topping class from another package
+import com.pluralsight.models.Meat;
 import com.pluralsight.models.Topping;
 import com.pluralsight.models.Bread;
+import com.pluralsight.models.ToppingManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,29 +12,76 @@ public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
 
-    //Making a new ArrayList for Toppings
-    ArrayList<Topping> toppings = new ArrayList<>();
-    ArrayList<Bread> breads = new ArrayList<>();
 
-    //bread method to instantiate all type of breads
-    public void addBread(){
-        breads.add(new Bread("White", 0.00));
-        breads.add(new Bread("Wheat", 0.50));
-        breads.add(new Bread("Gluten-Free", 1.00));
-        breads.add(new Bread("Rye", .75));
+    //addTopping method
+    public void addTopping() {
+
+        boolean isRunning = false;
+        while (!isRunning) {
+            System.out.println("""
+                    |===============================================|
+                    |                                               |
+                    |██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄  ▄▄▄▄\s |
+                    |  ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄ ███▄▄\s |
+                    |  ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀ ▄▄██▀\s |
+                    |===============================================|
+                    |1.              List All Toppings              |
+                    |-----------------------------------------------|
+                    |2.              Add Toppings                   |
+                    |-----------------------------------------------|
+                    |3.              Remove Toppings                |
+                    |-----------------------------------------------|
+                    |4.                  Back                       |
+                    |===============================================|
+                    """);
+            //Store users choice to navigate through the menu
+            int usersChoice = theScanner.nextInt();
+
+            switch (usersChoice) {
+                case 1:
+                    displayToppings();
+                    break;
+            }
+        }
     }
 
-    //topping method to instantiate all type of toppings
-    public void addTopping(){
-        toppings.add(new Topping("Lettuce", 0.00));
-        toppings.add(new Topping("Tomato", 0.00));
-        toppings.add(new Topping("Onions", 0.00));
-        toppings.add(new Topping("Ketchup", 0.00));
-        toppings.add(new Topping("Mustard", 0.00));
-        toppings.add(new Topping("Ranch", 0.50));
-        toppings.add(new Topping("BBQ", 0.50));
-        toppings.add(new Topping("Bacon", 2.00));
+    public void displayToppings() {
+        ToppingManager tManager = new ToppingManager();
+        boolean isRunning = false;
+        while(!isRunning) {
+            System.out.println("""
+                    
+                    |=====================================================================|
+                    | ▄████▄ ▄▄    ▄▄      ██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄  ▄▄▄▄\s |
+                    | ██▄▄██ ██    ██        ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄ ███▄▄\s |
+                    | ██  ██ ██▄▄▄ ██▄▄▄     ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀ ▄▄██▀\s |
+                    |=====================================================================|
+                    """);
+
+            //Loop through the ArrayList to display all the toppings
+            //Adding a counter to list all the display results
+            int counter = 1;
+            for (Topping topping : tManager.getToppings()) {
+                System.out.println(counter + ": " +
+                        topping.getToppingName() + ": " + topping.getToppingPrice());
+
+                counter++;
+            }
+            System.out.println();
+            System.out.print("Please choose a number to add to your order: ");
+            System.out.println();
+            int usersChoice = theScanner.nextInt();
+
+            switch(usersChoice){
+                case 1:
+
+            }
+        }
+
+
+
     }
+
 
     //Menu sign
     public void displayUI() {
@@ -88,7 +137,7 @@ public class UserInterface {
             //Store their choice in a variable
             int usersChoice = theScanner.nextInt();
 
-            switch(usersChoice){
+            switch (usersChoice) {
 
                 case 1:
                     newOrder();
@@ -103,40 +152,40 @@ public class UserInterface {
         }
     }
 
-    public void newOrder(){
+    public void newOrder() {
         boolean isRunning = false;
         //Prompt user the menu and store their answer to use to navigate
-        while(!isRunning) {
+        while (!isRunning) {
             System.out.println("""
-                    | =========================================================|
-                    |                                                          |
-                    |  ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄████▄ ▄▄▄▄  ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄ \s |
-                    |  ██ ▀▄██ ██▄▄  ██ ▄ ██   ██  ██ ██▄█▄ ██▀██ ██▄▄  ██▄█▄\s |
-                    |  ██   ██ ██▄▄▄  ▀█▀█▀    ▀████▀ ██ ██ ████▀ ██▄▄▄ ██ ██\s |
-                    |                                                          |
-                    |==========================================================|
-                    |                Please Choose an Option:                  |
-                    |==========================================================|
-                    |   1.                    Add Sandwich                     |
-                    |----------------------------------------------------------|
-                    |   2.                    Add Drink                        |
-                    |----------------------------------------------------------|
-                    |   3.                    Add Chips                        |
-                    |----------------------------------------------------------|
-                    |   4.                    Check Out                        |
-                    |----------------------------------------------------------|
-                    |   5.                    Cancel Order                     |
-                    |----------------------------------------------------------|
-                      
-                   """);
+                     | =========================================================|
+                     |                                                          |
+                     |  ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄████▄ ▄▄▄▄  ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄ \s |
+                     |  ██ ▀▄██ ██▄▄  ██ ▄ ██   ██  ██ ██▄█▄ ██▀██ ██▄▄  ██▄█▄\s |
+                     |  ██   ██ ██▄▄▄  ▀█▀█▀    ▀████▀ ██ ██ ████▀ ██▄▄▄ ██ ██\s |
+                     |                                                          |
+                     |==========================================================|
+                     |                Please Choose an Option:                  |
+                     |==========================================================|
+                     |   1.                    Create Sandwich                  |
+                     |----------------------------------------------------------|
+                     |   2.                    Add Drink                        |
+                     |----------------------------------------------------------|
+                     |   3.                    Add Chips                        |
+                     |----------------------------------------------------------|
+                     |   4.                    Check Out                        |
+                     |----------------------------------------------------------|
+                     |   5.                    Cancel Order                     |
+                     |----------------------------------------------------------|
+                    
+                    """);
             System.out.print("Your Option:");
             System.out.println();
             //Storing their answer to use
             int usersChoice = theScanner.nextInt();
 
-            switch(usersChoice){
+            switch (usersChoice) {
                 case 1:
-                    //addSandwich()
+                    addSandwich();
                     break;
                 case 2:
                     //addDrink()
@@ -155,4 +204,52 @@ public class UserInterface {
 
         }
     }
+
+    public void addSandwich() {
+        boolean isRunning = false;
+        while (!isRunning) {
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Please Choose an Option:                |
+                    |===========================================================|
+                    |1.                       Add Bread                         |
+                    |-----------------------------------------------------------|
+                    |2.                       Add Meat                          |
+                    |-----------------------------------------------------------|
+                    |3.                       Add Toppings                      |
+                    |-----------------------------------------------------------|
+                    |4.                       Add Sauce                         |
+                    |-----------------------------------------------------------|
+                    |5.                         Back                            |
+                    |===========================================================|
+                    """);
+            System.out.print("Your Option: ");
+            int usersChoice = theScanner.nextInt();
+
+            //Use a switch Statement to help navigate through the menu
+            switch (usersChoice) {
+                case 1:
+                    // addBread();
+                    break;
+                case 2:
+                    //addMeat();
+                    break;
+                case 3:
+                    addTopping();
+                    break;
+                case 4:
+                    //addSauce();
+                    break;
+                case 5:
+                    newOrder();
+                    break;
+            }
+        }
+    }
 }
+

@@ -1,5 +1,8 @@
 package com.pluralsight.models;
 
+import com.pluralsight.models.ToppingManager;
+import java.util.ArrayList;
+import com.pluralsight.ui.UserInterface;
 public class Topping {
     //Attributes
     private String toppingName;
@@ -11,5 +14,25 @@ public class Topping {
         this.toppingPrice = toppingPrice;
     }
 
+    //Setters/Getters
+    public double getToppingPrice() {
+        return toppingPrice;
+    }
 
+    public void setToppingPrice(double toppingPrice) {
+        this.toppingPrice = toppingPrice;
+    }
+
+    public String getToppingName() {
+        return toppingName;
+    }
+
+    public void setToppingName(String toppingName) {
+        this.toppingName = toppingName;
+    }
+
+    @Override
+    public String toString() {
+        return this.toppingName + ": $" + this.toppingPrice;
+    }
 }
