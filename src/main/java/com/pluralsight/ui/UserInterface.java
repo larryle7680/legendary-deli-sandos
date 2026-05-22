@@ -56,6 +56,7 @@ public class UserInterface {
                     2. Exit
                     
                     """);
+            System.out.print("Your Option: ");
             //Store their choice in a variable
             int usersChoice = theScanner.nextInt();
 
@@ -72,6 +73,58 @@ public class UserInterface {
 
 
         }
+    }
 
+    public void newOrder(){
+        boolean isRunning = false;
+        //Prompt user the menu and store their answer to use to navigate
+        while(!isRunning) {
+            System.out.println("""
+                    | =========================================================|
+                    |                                                          |
+                    |  ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄████▄ ▄▄▄▄  ▄▄▄▄  ▄▄▄▄▄ ▄▄▄▄ \s |
+                    |  ██ ▀▄██ ██▄▄  ██ ▄ ██   ██  ██ ██▄█▄ ██▀██ ██▄▄  ██▄█▄\s |
+                    |  ██   ██ ██▄▄▄  ▀█▀█▀    ▀████▀ ██ ██ ████▀ ██▄▄▄ ██ ██\s |
+                    |                                                          |
+                    |==========================================================|
+                    |                Please Choose an Option:                  |
+                    |==========================================================|
+                    |   1.                    Add Sandwich                     |
+                    |----------------------------------------------------------|
+                    |   2.                    Add Drink                        |
+                    |----------------------------------------------------------|
+                    |   3.                    Add Chips                        |
+                    |----------------------------------------------------------|
+                    |   4.                    Check Out                        |
+                    |----------------------------------------------------------|
+                    |   5.                    Cancel Order                     |
+                    |----------------------------------------------------------|
+                      
+                   """);
+            System.out.print("Your Option:");
+            System.out.println();
+            //Storing their answer to use
+            int usersChoice = theScanner.nextInt();
+
+            switch(usersChoice){
+                case 1:
+                    //addSandwich()
+                    break;
+                case 2:
+                    //addDrink()
+                    break;
+                case 3:
+                    //addChips()
+                    break;
+                case 4:
+                    //checkOut()
+                    break;
+                case 5:
+                    displayUI();
+                    break;
+            }
+
+
+        }
     }
 }
