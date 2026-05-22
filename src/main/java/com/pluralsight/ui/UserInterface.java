@@ -1,16 +1,28 @@
 package com.pluralsight.ui;
+
 //Import the topping class from another package
 import com.pluralsight.models.Topping;
+import com.pluralsight.models.Bread;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
-    //Making a new ArrayList for Toppings
-    static ArrayList<Topping> toppings = new ArrayList<>();
 
-    //topping method to instantiate all my toppings
+    //Making a new ArrayList for Toppings
+    ArrayList<Topping> toppings = new ArrayList<>();
+    ArrayList<Bread> breads = new ArrayList<>();
+
+    //bread method to instantiate all type of breads
+    public void addBread(){
+        breads.add(new Bread("White", 0.00));
+        breads.add(new Bread("Wheat", 0.50));
+        breads.add(new Bread("Gluten-Free", 1.00));
+        breads.add(new Bread("Rye", .75));
+    }
+
+    //topping method to instantiate all type of toppings
     public void addTopping(){
         toppings.add(new Topping("Lettuce", 0.00));
         toppings.add(new Topping("Tomato", 0.00));
