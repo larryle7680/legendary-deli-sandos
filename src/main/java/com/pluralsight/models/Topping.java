@@ -1,6 +1,6 @@
 package com.pluralsight.models;
 
-import com.pluralsight.models.ToppingManager;
+import com.pluralsight.models.IngredientsManager;
 import java.util.ArrayList;
 import com.pluralsight.ui.UserInterface;
 public class Topping {

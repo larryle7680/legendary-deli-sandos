@@ -1,86 +1,14 @@
 package com.pluralsight.ui;
 
 //Import the topping class from another package
-import com.pluralsight.models.Meat;
-import com.pluralsight.models.Topping;
-import com.pluralsight.models.Bread;
-import com.pluralsight.models.ToppingManager;
+import com.pluralsight.models.*;
+import com.pluralsight.models.IngredientsManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
-
-
-    //addTopping method
-    public void addTopping() {
-
-        boolean isRunning = false;
-        while (!isRunning) {
-            System.out.println("""
-                    |===============================================|
-                    |                                               |
-                    |██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄  ▄▄▄▄\s |
-                    |  ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄ ███▄▄\s |
-                    |  ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀ ▄▄██▀\s |
-                    |===============================================|
-                    |1.              List All Toppings              |
-                    |-----------------------------------------------|
-                    |2.              Add Toppings                   |
-                    |-----------------------------------------------|
-                    |3.              Remove Toppings                |
-                    |-----------------------------------------------|
-                    |4.                  Back                       |
-                    |===============================================|
-                    """);
-            //Store users choice to navigate through the menu
-            int usersChoice = theScanner.nextInt();
-
-            switch (usersChoice) {
-                case 1:
-                    displayToppings();
-                    break;
-            }
-        }
-    }
-
-    public void displayToppings() {
-        ToppingManager tManager = new ToppingManager();
-        boolean isRunning = false;
-        while(!isRunning) {
-            System.out.println("""
-                    
-                    |=====================================================================|
-                    | ▄████▄ ▄▄    ▄▄      ██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄  ▄▄▄▄\s |
-                    | ██▄▄██ ██    ██        ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄ ███▄▄\s |
-                    | ██  ██ ██▄▄▄ ██▄▄▄     ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀ ▄▄██▀\s |
-                    |=====================================================================|
-                    """);
-
-            //Loop through the ArrayList to display all the toppings
-            //Adding a counter to list all the display results
-            int counter = 1;
-            for (Topping topping : tManager.getToppings()) {
-                System.out.println(counter + ": " +
-                        topping.getToppingName() + ": " + topping.getToppingPrice());
-
-                counter++;
-            }
-            System.out.println();
-            System.out.print("Please choose a number to add to your order: ");
-            System.out.println();
-            int usersChoice = theScanner.nextInt();
-
-            switch(usersChoice){
-                case 1:
-
-            }
-        }
-
-
-
-    }
 
 
     //Menu sign
@@ -215,41 +143,155 @@ public class UserInterface {
                     | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
                     | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
                     |===========================================================|
-                    |                   Please Choose an Option:                |
+                    |                   Please A Choose a Bread                 |
                     |===========================================================|
-                    |1.                       Add Bread                         |
+                    |1.                         White                           |
                     |-----------------------------------------------------------|
-                    |2.                       Add Meat                          |
+                    |2.                         Wheat                           |
                     |-----------------------------------------------------------|
-                    |3.                       Add Toppings                      |
+                    |3.                       Gluten-Free                       |
                     |-----------------------------------------------------------|
-                    |4.                       Add Sauce                         |
+                    |4.                        Lettuce                          |
                     |-----------------------------------------------------------|
                     |5.                         Back                            |
                     |===========================================================|
                     """);
             System.out.print("Your Option: ");
-            int usersChoice = theScanner.nextInt();
+            int breadChoice = theScanner.nextInt();
 
             //Use a switch Statement to help navigate through the menu
-            switch (usersChoice) {
+            String breadType = "";
+            double breadPrice = 0;
+            switch (breadChoice) {
                 case 1:
-                    // addBread();
+                    breadType = "White";
+                    breadPrice = 0.00;
                     break;
                 case 2:
-                    //addMeat();
+                    breadType = "Wheat";
+                    breadPrice = 1.00;
                     break;
                 case 3:
-                    addTopping();
+                    breadType = "GlutenFree";
+                    breadPrice = 1.00;
                     break;
                 case 4:
-                    //addSauce();
+                    breadType = "Lettuce";
+                    breadPrice = 0.00;
                     break;
                 case 5:
                     newOrder();
                     break;
             }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Please A Choose a Size                  |
+                    |===========================================================|
+                    |1.                           4"                            |
+                    |-----------------------------------------------------------|
+                    |2.                           8"                            |
+                    |-----------------------------------------------------------|
+                    |3.                           12"                           |
+                    |-----------------------------------------------------------|
+                    |4.                          Home                           |
+                    |===========================================================|
+                    """);
+            //store the users input
+            System.out.print("Your Option: ");
+            int sizeChoice = theScanner.nextInt();
+            //Creating an empty variable, so it could be modified using the switch case
+            int size = 0;
+            switch(sizeChoice){
+                case 1:
+                    size = 4;
+                    break;
+                case 2:
+                    size = 8;
+                    break;
+                case 3:
+                    size = 12;
+                    break;
+                case 4:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Would you like it Toasted?              |
+                    |===========================================================|
+                    |1.                            Yes                          |
+                    |-----------------------------------------------------------|
+                    |2.                            No                           |
+                    |-----------------------------------------------------------|
+                    |3.                            Home                         |
+                    |-----------------------------------------------------------|
+                    |===========================================================|
+                    """);
+            //store the users input
+            System.out.print("Your Option: ");
+            int toastedChoice = theScanner.nextInt();
+
+            //Created an empty boolean variable to help with menu flow
+            boolean isToasted = false;
+
+            //Add a switch statement to help navigate through the menu
+            switch(toastedChoice){
+                case 1:
+                    isToasted = true;
+                    break;
+                case 2:
+                    isToasted = false;
+                    break;
+                case 3:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                       Choose your meat                    |
+                    |===========================================================|
+                    |1.                          Steak                          |
+                    |-----------------------------------------------------------|
+                    |2.                           Ham                           |
+                    |-----------------------------------------------------------|
+                    |3.                          Salami                         |
+                    |-----------------------------------------------------------|
+                    |4.                        Roast Beef                       |
+                    |-----------------------------------------------------------|
+                    |5.                         Chicken                         |
+                    |-----------------------------------------------------------|
+                    |6.                          Bacon                          |
+                    |===========================================================|
+                    """);
+            //store the users input
+
+
+
+
+
+
+
+
         }
     }
+
 }
 
