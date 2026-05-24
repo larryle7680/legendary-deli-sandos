@@ -279,9 +279,71 @@ public class UserInterface {
                     |5.                         Chicken                         |
                     |-----------------------------------------------------------|
                     |6.                          Bacon                          |
+                    |-----------------------------------------------------------|
+                    |7.                          Home                           |
                     |===========================================================|
                     """);
             //store the users input
+
+            int meatChoice = theScanner.nextInt();
+            String meatName = "";
+
+            switch(meatChoice){
+                case 1:
+                    meatName = "Steak";
+                    break;
+                case 2:
+                    meatName = "Ham";
+                    break;
+                case 3:
+                    meatName = "Salami";
+                    break;
+                case 4:
+                    meatName = "Roast Beef";
+                    break;
+                case 5:
+                    meatName = "Chicken";
+                    break;
+                case 6:
+                    meatName = "Bacon";
+                    break;
+                case 7:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Would you like Extra Meat?              |
+                    |===========================================================|
+                    |1.                            Yes                          |
+                    |-----------------------------------------------------------|
+                    |2.                            No                           |
+                    |-----------------------------------------------------------|
+                    |3.                            Home                         |
+                    |-----------------------------------------------------------|
+                    |===========================================================|
+                    """);
+
+            int extraMeatChoice = theScanner.nextInt();
+            boolean extraMeat = false;
+
+            switch(extraMeatChoice){
+                case 1:
+                    extraMeat = true;
+                    break;
+                case 2:
+                    extraMeat = false;
+                    break;
+                case 3:
+                    newOrder();
+                    break;
+            }
 
 
 
