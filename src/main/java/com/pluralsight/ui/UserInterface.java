@@ -2,13 +2,12 @@ package com.pluralsight.ui;
 
 //Import the topping class from another package
 import com.pluralsight.models.*;
-import com.pluralsight.models.IngredientsManager;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
+    Sandwich sandwich;
 
 
     //Menu sign
@@ -161,23 +160,18 @@ public class UserInterface {
 
             //Use a switch Statement to help navigate through the menu
             String breadType = "";
-            double breadPrice = 0;
             switch (breadChoice) {
                 case 1:
                     breadType = "White";
-                    breadPrice = 0.00;
                     break;
                 case 2:
                     breadType = "Wheat";
-                    breadPrice = 1.00;
                     break;
                 case 3:
                     breadType = "GlutenFree";
-                    breadPrice = 1.00;
                     break;
                 case 4:
                     breadType = "Lettuce";
-                    breadPrice = 0.00;
                     break;
                 case 5:
                     newOrder();
@@ -344,6 +338,12 @@ public class UserInterface {
                     newOrder();
                     break;
             }
+
+            //Create the sandwich
+            Sandwich sandwich = (new Sandwich(breadType, size, isToasted));
+
+            //Use the meat method to add all the meat
+            sandwich.addMeat(meatName,extraMeat);
 
 
 

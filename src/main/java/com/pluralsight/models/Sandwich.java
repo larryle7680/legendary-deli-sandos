@@ -1,8 +1,9 @@
 package com.pluralsight.models;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-public class Sandwich {
+public class Sandwich implements IMenuItem{
 
     //Attributes
     private int size;
@@ -19,7 +20,7 @@ public class Sandwich {
 
     //Constructor
 
-    public Sandwich(String breadType, int size, boolean isToasted, ArrayList<Topping> toppings, ArrayList<Meat> meats) {
+    public Sandwich(String breadType, int size, boolean isToasted) {
         this.size = size;
         this.breadType = breadType;
         this.isToasted = isToasted;
@@ -101,8 +102,18 @@ public class Sandwich {
                     break;
 
             }
-            cheeses.add(new Meat(cheese, price));
+            cheeses.add(new Cheese(cheese, price));
 
         }
+    }
+
+    @Override
+    public String getName() {
+        return "";
+    }
+
+    @Override
+    public double getPrice() {
+        return 0;
     }
 }
