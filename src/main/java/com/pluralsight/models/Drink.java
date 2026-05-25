@@ -3,12 +3,25 @@ package com.pluralsight.models;
 public class Drink implements IMenuItem{
     //Attributes
     private String drinkName;
-    private int drinkPrice;
+    private String drinkSize;
+    private double drinkPrice;
 
     //Constructor
-    public Drink(String drinkName, int drinkPrice) {
+    public Drink(String drinkName, String drinkSize) {
         this.drinkName = drinkName;
-        this.drinkPrice = drinkPrice;
+        this.drinkSize = drinkSize;
+
+        //Start drink price at 0 and changes depending on the size
+        double drinkPrice = 0;
+
+        //Logic for the drink pricing
+        if(drinkSize.equalsIgnoreCase("Small")){
+            drinkPrice = 2.00;
+        }else if(drinkSize.equalsIgnoreCase("Medium")){
+            drinkPrice = 2.50;
+        }else if(drinkSize.equalsIgnoreCase("Large")){
+            drinkPrice = 3.00;
+        }
     }
 
     @Override
