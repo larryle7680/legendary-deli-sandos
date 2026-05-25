@@ -17,6 +17,25 @@ public class Order {
     //Creating a list of MenuItems to hold the orders in
     private List<IMenuItem> items = new ArrayList<>();
 
+    //Adding sandwich to the item list
+    public void addSandwich(Sandwich sandwich){
+        items.add(sandwich);
+    }
 
+    //Adding Drink to the item list
+    public void addDrink(Drink drink){
+        items.add(drink);
+    }
+
+    //Adding sandwich to the item list
+    public void addChips(Chips chips){
+        items.add(chips);
+    }
+
+    //Add everything together for the get total
+    public void getTotal(){
+        double total = items.stream()
+                .mapToInt(item)
+    }
 
 }

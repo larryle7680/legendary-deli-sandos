@@ -1,7 +1,7 @@
 package com.pluralsight.models;
 import com.pluralsight.ui.UserInterface;
 
-public class Meat {
+public class Meat implements IMenuItem{
     //Attributes
     private String meatName;
     private double meatPrice;
@@ -13,19 +13,22 @@ public class Meat {
     }
 
     //Setters/Getters
-    public String getMeatName() {
-        return meatName;
-    }
-
     public void setMeatName(String meatName) {
         this.meatName = meatName;
     }
 
-    public double getMeatPrice() {
-        return meatPrice;
-    }
 
     public void setMeatPrice(double meatPrice) {
         this.meatPrice = meatPrice;
+    }
+
+    @Override
+    public String getName() {
+        return meatName;
+    }
+
+    @Override
+    public double getPrice() {
+        return meatPrice;
     }
 }

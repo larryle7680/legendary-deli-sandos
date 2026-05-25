@@ -7,8 +7,6 @@ public class Sandwich implements IMenuItem{
 
     //Attributes
     private int size;
-    private String topping;
-    private String sauce;
     private String breadType;
     private boolean isToasted;
     private double basePrice;
@@ -44,31 +42,19 @@ public class Sandwich implements IMenuItem{
         switch (this.size) {
             case 4:
                 price = 1.00;
+                if(extraMeat) price += 0.50;
                 break;
             case 8:
                 price = 2.00;
-                break;
+                if(extraMeat) price += 1.00;
             case 12:
                 price = 3.00;
+                if (extraMeat) price += 1.50;
                 break;
         }
-        //If they want extra meat it'll add on top of the price they chose
-        if (extraMeat) {
-            switch (this.size) {
-                case 4:
-                    price += .50;
-                    break;
-                case 8:
-                    price += 1.00;
-                    break;
-                case 12:
-                    price += 1.50;
-                    break;
+        //If any of these conditions are true, then it'll add to the list of Meat
+        meats.add(new Meat(meat, price));
 
-            }
-            meats.add(new Meat(meat, price));
-
-        }
     }
 
     //AddCheese Method
@@ -80,40 +66,42 @@ public class Sandwich implements IMenuItem{
         switch (this.size) {
             case 4:
                 price = 1.00;
+                if(extraCheese) price += 0.30;
                 break;
             case 8:
                 price = 2.00;
+                if(extraCheese) price += 0.60;
                 break;
             case 12:
                 price = 3.00;
+                if(extraCheese) price += 0.90;
                 break;
         }
-        //If they want extra meat it'll add on top of the price they chose
-        if (extraCheese) {
-            switch (this.size) {
-                case 4:
-                    price += .50;
-                    break;
-                case 8:
-                    price += 1.00;
-                    break;
-                case 12:
-                    price += 1.50;
-                    break;
+        cheeses.add(new Cheese(cheese,price));
 
-            }
-            cheeses.add(new Cheese(cheese, price));
-
-        }
     }
 
     @Override
     public String getName() {
-        return "";
+        return "Size: \n" + size + "Bread: \n" + breadType;
     }
 
     @Override
     public double getPrice() {
-        return 0;
+        double total = basePrice;
+        //Loop through the ingredients that got placed inside the ArrayList
+        for(Meat meat: meats){
+            total += meat.getPrice();
+        }
+
+        for(Cheese cheese : cheeses){
+            total += cheese.getPrice();
+        }
+
+        for(Topping topping: toppings){
+            total =+topping.getPrice();
+        }
+
+        return total;
     }
 }
