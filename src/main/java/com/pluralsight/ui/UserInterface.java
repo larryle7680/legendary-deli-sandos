@@ -339,11 +339,94 @@ public class UserInterface {
                     break;
             }
 
+            //Prompt users for cheese
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                       Choose your Cheese                  |
+                    |===========================================================|
+                    |1.                          American                       |
+                    |-----------------------------------------------------------|
+                    |2.                          Provolone                      |
+                    |-----------------------------------------------------------|
+                    |3.                          Cheddar                        |
+                    |-----------------------------------------------------------|
+                    |4.                           Swiss                         |
+                    |-----------------------------------------------------------|
+                    |5.                           Home                          |
+                    |===========================================================|
+                   
+                    """);
+            //store the users input
+
+            int cheeseChoice = theScanner.nextInt();
+            String cheeseName = "";
+
+            switch(cheeseChoice){
+                case 1:
+                    cheeseName = "American";
+                    break;
+                case 2:
+                    cheeseName = "Provolone";
+                    break;
+                case 3:
+                    cheeseName = "Cheddar";
+                    break;
+                case 4:
+                    cheeseName = "Swiss";
+                    break;
+                case 5:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Would you like Extra Cheese?            |
+                    |===========================================================|
+                    |1.                            Yes                          |
+                    |-----------------------------------------------------------|
+                    |2.                            No                           |
+                    |-----------------------------------------------------------|
+                    |3.                            Home                         |
+                    |-----------------------------------------------------------|
+                    |===========================================================|
+                    """);
+
+            int extraCheeseChoice = theScanner.nextInt();
+            boolean extraCheese = false;
+
+            switch(extraCheeseChoice){
+                case 1:
+                    extraCheese = true;
+                    break;
+                case 2:
+                    extraCheese = false;
+                    break;
+                case 3:
+                    newOrder();
+            }
+
             //Create the sandwich
             Sandwich sandwich = (new Sandwich(breadType, size, isToasted));
-
-            //Use the meat method to add all the meat
+            //Use the addMeat method to add all the meat
             sandwich.addMeat(meatName,extraMeat);
+            //Use the addCheese method to add all the Cheese
+            sandwich.addCheese(cheeseName,extraCheese);
+
+            System.out.println("=== Sandwich Confirmation===");
+            System.out.println();
+            System.out.println("Sandwich: " + sandwich.getName());
+            System.out.println("Price: " + sandwich.getPrice());
 
 
 
@@ -353,6 +436,10 @@ public class UserInterface {
 
 
         }
+    }
+
+    public void addDrink(){
+
     }
 
 }
