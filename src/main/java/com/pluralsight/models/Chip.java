@@ -7,11 +7,9 @@ public class Chip implements IMenuItem{
     private double chipPrice;
 
     //Constructor
-
-
-    public Chip(String chipName, double chipPrice) {
+    public Chip(String chipName) {
         this.chipName = chipName;
-        this.chipPrice = chipPrice;
+        this.chipPrice = 1.50;
     }
 
     @Override

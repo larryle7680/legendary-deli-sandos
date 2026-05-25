@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
-    Sandwich sandwich;
+    Order order;
+    //Creating a variable, so I can store things from different methods
+    private Sandwich currentSandwich;
 
 
     //Menu sign
@@ -115,13 +117,13 @@ public class UserInterface {
                     addSandwich();
                     break;
                 case 2:
-                    //addDrink()
+                    addDrink();
                     break;
                 case 3:
-                    //addChips()
+                    addChips();
                     break;
                 case 4:
-                    //checkOut()
+                    //checkOut();
                     break;
                 case 5:
                     displayUI();
@@ -150,7 +152,7 @@ public class UserInterface {
                     |-----------------------------------------------------------|
                     |3.                       Gluten-Free                       |
                     |-----------------------------------------------------------|
-                    |4.                        Lettuce                          |
+                    |4.                        Lettuce Wrap                     |
                     |-----------------------------------------------------------|
                     |5.                         Back                            |
                     |===========================================================|
@@ -253,6 +255,327 @@ public class UserInterface {
                     break;
             }
 
+            //Prompt users for cheese
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                       Choose your Cheese                  |
+                    |===========================================================|
+                    |1.                          American                       |
+                    |-----------------------------------------------------------|
+                    |2.                          Provolone                      |
+                    |-----------------------------------------------------------|
+                    |3.                          Cheddar                        |
+                    |-----------------------------------------------------------|
+                    |4.                           Swiss                         |
+                    |-----------------------------------------------------------|
+                    |5.                           Home                          |
+                    |===========================================================|
+                    
+                    """);
+            //store the users input
+            int cheeseChoice = theScanner.nextInt();
+            String cheeseName = "";
+
+            switch (cheeseChoice) {
+                case 1:
+                    cheeseName = "American";
+                    break;
+                case 2:
+                    cheeseName = "Provolone";
+                    break;
+                case 3:
+                    cheeseName = "Cheddar";
+                    break;
+                case 4:
+                    cheeseName = "Swiss";
+                    break;
+                case 5:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |===========================================================|
+                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
+                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
+                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
+                    |===========================================================|
+                    |                   Would you like Extra Cheese?            |
+                    |===========================================================|
+                    |1.                            Yes                          |
+                    |-----------------------------------------------------------|
+                    |2.                            No                           |
+                    |-----------------------------------------------------------|
+                    |3.                            Home                         |
+                    |-----------------------------------------------------------|
+                    |===========================================================|
+                    """);
+
+            int extraCheeseChoice = theScanner.nextInt();
+            boolean extraCheese = false;
+
+            switch (extraCheeseChoice) {
+                case 1:
+                    extraCheese = true;
+                    break;
+                case 2:
+                    extraCheese = false;
+                    break;
+                case 3:
+                    newOrder();
+            }
+
+            //Create the sandwich
+            currentSandwich = (new Sandwich(breadType, size, isToasted));
+
+            //Use the addCheese method to add all the Cheese
+            sandwich.addCheese(cheeseName, extraCheese);
+
+            System.out.println("=== Sandwich Confirmation===");
+            System.out.println();
+            System.out.println("Sandwich: " + sandwich.getName());
+            System.out.println("Price: " + sandwich.getPrice());
+
+            order.addSandwich(sandwich);
+
+
+        }
+    }
+
+    public void menuToppings(){
+        boolean isRunning = false;
+        while(!isRunning){
+            System.out.println("""
+                    
+                   |===============================================================| 
+                   | ▄████▄ ▄▄▄▄  ▄▄▄▄    ██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄\s |
+                   | ██▄▄██ ██▀██ ██▀██     ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄\s |
+                   | ██  ██ ████▀ ████▀     ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀\s |
+                   |===============================================================|
+                   |                         Add Toppings?                         |
+                   |---------------------------------------------------------------|
+                   |1.                            Yes                              |
+                   |---------------------------------------------------------------|
+                   |2.                             No                              |
+                   |===============================================================| 
+                    """);
+            System.out.print("Your Option: ");
+            int toppingInput = theScanner.nextInt();
+
+            switch(toppingInput){
+                case 1:
+                    promptTopping();
+                    break;
+                case 2:
+                    newOrder();
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    break;
+            }
+        }
+    }
+
+    public void promptTopping(){
+        boolean isRunning = false;
+        while(!isRunning){
+            System.out.println("""
+                    
+                   |===============================================================|
+                   | ▄████▄ ▄▄▄▄  ▄▄▄▄    ██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄\s |
+                   | ██▄▄██ ██▀██ ██▀██     ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄\s |
+                   | ██  ██ ████▀ ████▀     ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀\s |
+                   |===============================================================|
+                   |                           Choose an Option                    |
+                   |---------------------------------------------------------------|
+                   |1.                            Add Meat                         |
+                   |---------------------------------------------------------------|
+                   |2.                            Add Cheese                       |
+                   |---------------------------------------------------------------|
+                   |3.                          Add Regular Toppings               |
+                   |---------------------------------------------------------------|
+                   |4.                             Add Sauce                       |
+                   |---------------------------------------------------------------|
+                   |5.                              Back                           |
+                   |===============================================================|
+                    """);
+            System.out.print("Your Option: ");
+            int usersChoice = theScanner.nextInt();
+
+            switch(usersChoice){
+                case 1:
+                    addMeat();
+                    break;
+            }
+        }
+    }
+
+    public void addDrink() {
+        boolean isRunning = false;
+        while (!isRunning) {
+            System.out.println("""
+                    
+                    |====================================================|
+                    | ▄████▄ ▄▄▄▄  ▄▄▄▄    ████▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄ ▄▄ ▄▄\s |
+                    | ██▄▄██ ██▀██ ██▀██   ██  ██ ██▄█▄ ██ ███▄██ ██▄█▀\s |
+                    | ██  ██ ████▀ ████▀   ████▀  ██ ██ ██ ██ ▀██ ██ ██\s |
+                    |====================================================|
+                    |1.                        Coke                      |
+                    |----------------------------------------------------|
+                    |2.                       Sprite                     |
+                    |----------------------------------------------------|
+                    |3.                       Fanta                      |
+                    |----------------------------------------------------|
+                    |4.                      Jaritos                     |
+                    |----------------------------------------------------|
+                    |5.                      Hi-C Orange                 |
+                    |----------------------------------------------------|
+                    |6.                       Home                       |
+                    |====================================================|
+                    """);
+            System.out.print("Your Option: ");
+            //Store their choice into a variable to navigate through the menu
+            int drinkChoice = theScanner.nextInt();
+            //Empty variable to modify it depending on what they choose
+            String drinkName = "";
+
+            //Switch statement to modify the empty variable
+            switch (drinkChoice) {
+                case 1:
+                    drinkName = "Coke";
+                    break;
+                case 2:
+                    drinkName = "Sprite";
+                    break;
+                case 3:
+                    drinkName = "Jaritos";
+                    break;
+                case 4:
+                    drinkName = "Hi-C Orange";
+                    break;
+                case 5:
+                    newOrder();
+                    break;
+            }
+
+            System.out.println("""
+                    
+                    |====================================================|
+                    | ▄████▄ ▄▄▄▄  ▄▄▄▄    ████▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄ ▄▄ ▄▄\s |
+                    | ██▄▄██ ██▀██ ██▀██   ██  ██ ██▄█▄ ██ ███▄██ ██▄█▀\s |
+                    | ██  ██ ████▀ ████▀   ████▀  ██ ██ ██ ██ ▀██ ██ ██\s |
+                    |====================================================|
+                    |                     Choose a Size                  |
+                    |----------------------------------------------------|
+                    |1.                      Small                       |
+                    |----------------------------------------------------|
+                    |2.                      Medium                      |
+                    |----------------------------------------------------|
+                    |3.                      Large                       |
+                    |----------------------------------------------------|
+                    |4.                       Home                       |
+                    |====================================================| 
+                    """);
+            System.out.print("Your Option: ");
+            int drinkSizeChoice = theScanner.nextInt();
+            String drinkSize = "";
+
+            //Switch statement to navigate through the choices
+            switch(drinkSizeChoice){
+                case 1:
+                    drinkSize = "Small";
+                    break;
+
+                case 2:
+                    drinkSize = "Medium";
+                    break;
+
+                case 3:
+                    drinkSize = "Large";
+                    break;
+
+                case 4:
+                    newOrder();
+                    break;
+            }
+
+            Drink drink = new Drink(drinkName,drinkSize);
+            order.addDrink(drink);
+        }
+
+    }
+
+    public void addChips(){
+        boolean isRunning = false;
+       //While the menu is running prompt this to the user
+        while (!isRunning){
+
+            System.out.println("""
+                    
+                   |==================================================| 
+                   | ▄████▄ ▄▄▄▄  ▄▄▄▄    ▄█████ ▄▄ ▄▄ ▄▄ ▄▄▄▄   ▄▄▄▄\s|
+                   | ██▄▄██ ██▀██ ██▀██   ██     ██▄██ ██ ██▄█▀ ███▄▄\s|
+                   | ██  ██ ████▀ ████▀   ▀█████ ██ ██ ██ ██    ▄▄██▀\s|
+                   |==================================================|
+                   |1.                  Kettle Jalapeno               |
+                   |--------------------------------------------------|
+                   |2.                      BBQ                       |
+                   |--------------------------------------------------|
+                   |3.                Ruffles' Hot BBQ                |
+                   |--------------------------------------------------|
+                   |4.                     Funyuns                    |
+                   |--------------------------------------------------|
+                   |5.                   Hot Fries                    |
+                   |--------------------------------------------------|
+                   |6.                     Home                       |
+                   |==================================================| 
+                    
+                    """);
+            System.out.println("Your option:");
+            //Store the choice inside a variable to navigate through the menu
+            int chipChoice = theScanner.nextInt();
+            //Create an empty variable to later modify using the menu
+            String chipName = "";
+            //Using a switch statement to navigate through the menu.
+            switch(chipChoice){
+                case 1:
+                    chipName = "Kettle Jalapeno";
+                    break;
+                case 2:
+                    chipName = "BBQ";
+                    break;
+                case 3:
+                    chipName = "Ruffles' Hot BBQ";
+                    break;
+                case 4:
+                    chipName = "Funyuns";
+                    break;
+                case 5:
+                    chipName = "Hot Fries";
+                    break;
+                case 6:
+                    newOrder();
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    return;
+            }
+            //Instantiate the Chip class, and pass through the users input
+            Chip chip = new Chip(chipName);
+            order.addChips(chip);
+
+        }
+    }
+
+    public void addMeat(){
+        boolean isRunning = false;
+        while(!isRunning){
             System.out.println("""
                     
                     |===========================================================|
@@ -339,147 +662,13 @@ public class UserInterface {
                     break;
             }
 
-            //Prompt users for cheese
-            System.out.println("""
-                    
-                    |===========================================================|
-                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
-                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
-                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
-                    |===========================================================|
-                    |                       Choose your Cheese                  |
-                    |===========================================================|
-                    |1.                          American                       |
-                    |-----------------------------------------------------------|
-                    |2.                          Provolone                      |
-                    |-----------------------------------------------------------|
-                    |3.                          Cheddar                        |
-                    |-----------------------------------------------------------|
-                    |4.                           Swiss                         |
-                    |-----------------------------------------------------------|
-                    |5.                           Home                          |
-                    |===========================================================|
-                    
-                    """);
-            //store the users input
-
-            int cheeseChoice = theScanner.nextInt();
-            String cheeseName = "";
-
-            switch (cheeseChoice) {
-                case 1:
-                    cheeseName = "American";
-                    break;
-                case 2:
-                    cheeseName = "Provolone";
-                    break;
-                case 3:
-                    cheeseName = "Cheddar";
-                    break;
-                case 4:
-                    cheeseName = "Swiss";
-                    break;
-                case 5:
-                    newOrder();
-                    break;
-            }
-
-            System.out.println("""
-                    
-                    |===========================================================|
-                    | ███  ██ ▄▄▄▄▄ ▄▄   ▄▄   ▄█████  ▄▄▄  ▄▄  ▄▄ ▄▄▄▄   ▄▄▄ \s  |
-                    | ██ ▀▄██ ██▄▄  ██ ▄ ██   ▀▀▀▄▄▄ ██▀██ ███▄██ ██▀██ ██▀██\s  |
-                    | ██   ██ ██▄▄▄  ▀█▀█▀    █████▀ ██▀██ ██ ▀██ ████▀ ▀███▀\s  |
-                    |===========================================================|
-                    |                   Would you like Extra Cheese?            |
-                    |===========================================================|
-                    |1.                            Yes                          |
-                    |-----------------------------------------------------------|
-                    |2.                            No                           |
-                    |-----------------------------------------------------------|
-                    |3.                            Home                         |
-                    |-----------------------------------------------------------|
-                    |===========================================================|
-                    """);
-
-            int extraCheeseChoice = theScanner.nextInt();
-            boolean extraCheese = false;
-
-            switch (extraCheeseChoice) {
-                case 1:
-                    extraCheese = true;
-                    break;
-                case 2:
-                    extraCheese = false;
-                    break;
-                case 3:
-                    newOrder();
-            }
-
-            //Create the sandwich
-            Sandwich sandwich = (new Sandwich(breadType, size, isToasted));
             //Use the addMeat method to add all the meat
-            sandwich.addMeat(meatName, extraMeat);
-            //Use the addCheese method to add all the Cheese
-            sandwich.addCheese(cheeseName, extraCheese);
-
-            System.out.println("=== Sandwich Confirmation===");
-            System.out.println();
-            System.out.println("Sandwich: " + sandwich.getName());
-            System.out.println("Price: " + sandwich.getPrice());
-
-
+            currentSandwich.addMeat(meatName, extraMeat);
         }
     }
 
-    public void addDrink() {
+    public void addCheese(){
         boolean isRunning = false;
-        while (!isRunning) {
-            System.out.println("""
-                    
-                    |====================================================|
-                    | ▄████▄ ▄▄▄▄  ▄▄▄▄    ████▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄ ▄▄ ▄▄\s |
-                    | ██▄▄██ ██▀██ ██▀██   ██  ██ ██▄█▄ ██ ███▄██ ██▄█▀\s |
-                    | ██  ██ ████▀ ████▀   ████▀  ██ ██ ██ ██ ▀██ ██ ██\s |
-                    |====================================================|
-                    |1.                        Coke                      |
-                    |----------------------------------------------------|
-                    |2.                       Sprite                     |
-                    |----------------------------------------------------|
-                    |3.                       Fanta                      |
-                    |----------------------------------------------------|
-                    |4.                      Jaritos                     |
-                    |----------------------------------------------------|
-                    |5.                      Hi-C Orange                 |
-                    |----------------------------------------------------|
-                    |6.                       Home                       |
-                    |====================================================|
-                    """);
-            System.out.print("Your Option: ");
-            //Store their choice into a variable to navigate through the menu
-            int drinkChoice = theScanner.nextInt();
-            //Empty variable to modify it depending on what they choose
-            String drinkName = "";
-
-            //Switch statement to modify the empty variable
-            switch (drinkChoice) {
-                case 1:
-                    drinkName = "Coke";
-                    break;
-                case 2:
-                    drinkName = "Sprite";
-                    break;
-                case 3:
-                    drinkName = "Jaritos";
-                    break;
-                case 4:
-                    drinkName = "Hi-C Orange";
-                    break;
-                case 5:
-                    newOrder();
-                    break;
-            }
-        }
 
     }
 }
