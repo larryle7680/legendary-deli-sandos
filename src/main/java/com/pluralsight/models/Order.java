@@ -28,14 +28,18 @@ public class Order {
     }
 
     //Adding sandwich to the item list
-    public void addChips(Chips chips){
+    public void addChips(Chip chips){
         items.add(chips);
     }
 
     //Add everything together for the get total
     public void getTotal(){
+        //Start stream to loop through the items, then .map it to double
+        //Use method reference getPrice through the interface
+        //.sum to add it all together
         double total = items.stream()
-                .mapToInt(item)
+                .mapToDouble(IMenuItem::getPrice)
+                .sum();
     }
 
 }

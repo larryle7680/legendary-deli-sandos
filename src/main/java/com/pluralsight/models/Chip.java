@@ -16,11 +16,11 @@ public class Chip implements IMenuItem{
 
     @Override
     public String getName() {
-        return "";
+        return this.chipName;
     }
 
     @Override
     public double getPrice() {
-        return 0;
+        return this.chipPrice;
     }
 }

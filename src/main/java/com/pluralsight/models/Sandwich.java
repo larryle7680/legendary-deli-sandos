@@ -90,6 +90,7 @@ public class Sandwich implements IMenuItem{
     public double getPrice() {
         double total = basePrice;
         //Loop through the ingredients that got placed inside the ArrayList
+        //And get its price to add to the total
         for(Meat meat: meats){
             total += meat.getPrice();
         }
