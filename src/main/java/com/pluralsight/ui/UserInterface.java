@@ -759,9 +759,38 @@ public class UserInterface {
                      return;
              }
 
-             Topping topping = new Topping(toppingName, 0.00);
+            Topping topping = new Topping(toppingName, 0.00);
+            currentSandwich.addTopping(topping);
 
-             currentSandwich.addTopping(topping);
+            System.out.println(toppingName + " added!");
+
+            System.out.println();
+            System.out.println("""
+                    |======================|
+                    |     Add Another?     |
+                    |======================|
+                    |1.      Yes           |
+                    |----------------------|
+                    |2.       No           |
+                    |======================|
+                    """);
+
+            int addChoice = theScanner.nextInt();
+
+            //Press 2 to end loop/ if they press 1 it should go back to the while loop
+            if(addChoice == 2){
+                return;
+            }
+
+
+            System.out.println("""
+                    |======================|
+                    | Topping Confirmation |
+                    |======================|
+                    """);
+
+            currentSandwich.displayTopping();
+
         }
     }
 

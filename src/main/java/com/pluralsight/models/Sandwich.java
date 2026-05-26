@@ -32,6 +32,13 @@ public class Sandwich implements IMenuItem{
         }
     }
 
+    //Make a method to display all the toppings
+    public void displayTopping(){
+        for(Topping topping : toppings){
+            System.out.println(topping.getName() + " $" + topping.getPrice());
+        }
+    }
+
     //Takes in an Object of toppings then use this method to add to current sandwich
     public void addTopping(Topping topping){
         toppings.add(topping);
