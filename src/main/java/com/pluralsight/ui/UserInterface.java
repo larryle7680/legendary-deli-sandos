@@ -352,7 +352,7 @@ public class UserInterface {
                     addCheese();
                     break;
                 case 3:
-                    //addTopping();
+                    addTopping();
                     break;
             }
         }
@@ -779,21 +779,128 @@ public class UserInterface {
 
             //Press 2 to end loop/ if they press 1 it should go back to the while loop
             if(addChoice == 2){
-                return;
-            }
-
-
-            System.out.println("""
+                System.out.println("""
                     |======================|
                     | Topping Confirmation |
                     |======================|
                     """);
 
-            currentSandwich.displayTopping();
+                currentSandwich.displayTopping();
+                return;
+            }
+
+
+
 
         }
     }
 
+    public void addSauce(){
+        boolean isRunning = false;
+        while(!isRunning){
+            System.out.println("""
+                    
+                   |===============================================================| 
+                   | ▄████▄ ▄▄▄▄  ▄▄▄▄    ██████ ▄▄▄  ▄▄▄▄  ▄▄▄▄  ▄▄ ▄▄  ▄▄  ▄▄▄▄\s |
+                   | ██▄▄██ ██▀██ ██▀██     ██  ██▀██ ██▄█▀ ██▄█▀ ██ ███▄██ ██ ▄▄\s |
+                   | ██  ██ ████▀ ████▀     ██  ▀███▀ ██    ██    ██ ██ ▀██ ▀███▀\s |
+                   |===============================================================|
+                   |                          Add Sauce?                           |
+                   |---------------------------------------------------------------|
+                   |1.                           Mayo                              |
+                   |---------------------------------------------------------------|
+                   |2.                          Mustard                            |
+                   |---------------------------------------------------------------|
+                   |3.                          Ketchup                            |
+                   |---------------------------------------------------------------|
+                   |4.                          Ranch                              |
+                   |---------------------------------------------------------------|
+                   |5.                          Honey Butter                       |
+                   |---------------------------------------------------------------|
+                   |6.                            Back                             |
+                   |===============================================================|                                    
+                    """);
+            int usersChoice = theScanner.nextInt();
+            String sauceName = "";
+
+            switch(usersChoice){
+                case 1:
+                    sauceName = "Mayo";
+                    break;
+                case 2:
+                    sauceName = "Mustard";
+                    break;
+                case 3:
+                    sauceName = "Ketchup";
+                    break;
+                case 4:
+                    sauceName = "Ranch";
+                    break;
+                case 5:
+                    sauceName = "Honey Butter";
+                    break;
+                case 6:
+                    addSandwich();
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    return;
+            }
+
+            Sauce sauce = new Sauce(sauceName, 0.00);
+            currentSandwich.addSauce(sauce);
+
+            System.out.println(sauceName + " added!");
+
+            System.out.println();
+            System.out.println("""
+                    |======================|
+                    |     Add Another?     |
+                    |======================|
+                    |1.      Yes           |
+                    |----------------------|
+                    |2.       No           |
+                    |======================|
+                    """);
+
+            int addChoice = theScanner.nextInt();
+
+            //Press 2 to end loop/ if they press 1 it should go back to the while loop
+            if(addChoice == 2){
+                System.out.println("""
+                    |======================|
+                    |  Sauce Confirmation  |
+                    |======================|
+                    """);
+
+                currentSandwich.displaySauce();
+                return;
+            }
+
+
+
+
+        }
+    }
+
+    public void checkOut(){
+        boolean isRunning = false;
+        while(!isRunning){
+            System.out.println("""
+                    
+                   |===========================================================================|
+                   |                                                                       ▄▄\s |
+                   | ▄█████ ▄▄ ▄▄ ▄▄▄▄▄  ▄▄▄▄ ▄▄ ▄▄ ▄▄ ▄▄  ▄▄  ▄▄▄▄   ▄████▄ ▄▄ ▄▄ ▄▄▄▄▄▄  ██\s |
+                   | ██     ██▄██ ██▄▄  ██▀▀▀ ██▄█▀ ██ ███▄██ ██ ▄▄   ██  ██ ██ ██   ██    ██\s |
+                   | ▀█████ ██ ██ ██▄▄▄ ▀████ ██ ██ ██ ██ ▀██ ▀███▀   ▀████▀ ▀███▀   ██    ▄▄\s |
+                   |===========================================================================| 
+                """);
+            System.out.print("Name for the Order?: ");
+            String orderName = theScanner.nextLine();
+            //Generates a random number for the order number 1-1000
+            int orderNumber = ((int) Math.random() * 1000) + 1;
+        }
+    }
 
 }
 

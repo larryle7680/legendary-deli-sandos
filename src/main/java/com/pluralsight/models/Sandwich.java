@@ -14,6 +14,7 @@ public class Sandwich implements IMenuItem{
     private ArrayList<Topping> toppings = new ArrayList<>();
     private ArrayList<Meat> meats = new ArrayList<>();
     private ArrayList<Cheese> cheeses = new ArrayList<>();
+    private ArrayList<Sauce> sauces = new ArrayList<>();
 
     //Constructor
 
@@ -32,11 +33,23 @@ public class Sandwich implements IMenuItem{
         }
     }
 
-    //Make a method to display all the toppings
+    //Make a method to display all the toppings for confirmation
     public void displayTopping(){
         for(Topping topping : toppings){
             System.out.println(topping.getName() + " $" + topping.getPrice());
         }
+    }
+
+    //Make a method to display all sauces for confirmation
+    public void displaySauce(){
+        for(Sauce sauce : sauces){
+            System.out.println(sauce.getName() + " $" + sauce.getPrice());
+        }
+    }
+
+    //Takes in an object of sauces, then use this method to add to the current sandwich
+    public void addSauce(Sauce sauce){
+        sauces.add(sauce);
     }
 
     //Takes in an Object of toppings then use this method to add to current sandwich

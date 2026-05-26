@@ -13,6 +13,11 @@ public class Order {
     //Creating a list of MenuItems to hold the orders in
     private List<IMenuItem> items = new ArrayList<>();
 
+    //To get all the items that are stored inside items
+    public List<IMenuItem> getItems() {
+        return items;
+    }
+
     //Adding sandwich to the item list
     public void addSandwich(Sandwich sandwich){
         items.add(sandwich);
