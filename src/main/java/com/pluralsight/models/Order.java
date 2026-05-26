@@ -4,14 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    //Attributes of order
-    private String orderName;
-    private int orderNumber;
 
     //Constructor
-    public Order(String orderName, int orderNumber){
-        this.orderName = orderName;
-        this.orderNumber = orderNumber;
+    public Order(){
+
     }
 
     //Creating a list of MenuItems to hold the orders in
@@ -33,13 +29,15 @@ public class Order {
     }
 
     //Add everything together for the get total
-    public void getTotal(){
+    public double getTotal(){
         //Start stream to loop through the items, then .map it to double
         //Use method reference getPrice through the interface
         //.sum to add it all together
         double total = items.stream()
                 .mapToDouble(IMenuItem::getPrice)
                 .sum();
+        return total;
     }
+
 
 }

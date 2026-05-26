@@ -1,6 +1,5 @@
 package com.pluralsight.models;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Sandwich implements IMenuItem{
@@ -33,6 +32,10 @@ public class Sandwich implements IMenuItem{
         }
     }
 
+    //Takes in an Object of toppings then use this method to add to current sandwich
+    public void addTopping(Topping topping){
+        toppings.add(topping);
+    }
 
     public void addMeat(String meat, boolean extraMeat) {
         //Starting price and it'll change depending on size
@@ -47,6 +50,7 @@ public class Sandwich implements IMenuItem{
             case 8:
                 price = 2.00;
                 if(extraMeat) price += 1.00;
+                break;
             case 12:
                 price = 3.00;
                 if (extraMeat) price += 1.50;
@@ -100,7 +104,7 @@ public class Sandwich implements IMenuItem{
         }
 
         for(Topping topping: toppings){
-            total =+topping.getPrice();
+            total += topping.getPrice();
         }
 
         return total;

@@ -16,11 +16,11 @@ public class Drink implements IMenuItem{
 
         //Logic for the drink pricing
         if(drinkSize.equalsIgnoreCase("Small")){
-            drinkPrice = 2.00;
+            this.drinkPrice = 2.00;
         }else if(drinkSize.equalsIgnoreCase("Medium")){
-            drinkPrice = 2.50;
+            this.drinkPrice = 2.50;
         }else if(drinkSize.equalsIgnoreCase("Large")){
-            drinkPrice = 3.00;
+            this.drinkPrice = 3.00;
         }
     }
 

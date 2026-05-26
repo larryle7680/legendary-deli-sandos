@@ -1,5 +1,4 @@
 package com.pluralsight.models;
-import com.pluralsight.ui.UserInterface;
 
 public class Meat implements IMenuItem{
     //Attributes
