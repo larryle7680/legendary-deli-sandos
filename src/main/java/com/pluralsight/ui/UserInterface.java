@@ -128,7 +128,7 @@ public class UserInterface {
                     menuToppings();
                     break;
                 case 5:
-                    //checkOut();
+                    checkOut();
                     break;
                 case 6:
                     displayUI();
@@ -899,6 +899,27 @@ public class UserInterface {
             String orderName = theScanner.nextLine();
             //Generates a random number for the order number 1-1000
             int orderNumber = ((int) Math.random() * 1000) + 1;
+
+            System.out.printf("""
+                    
+                   |=================================================| 
+                   | ▄█████ ▄▄ ▄▄ ▄▄   ▄▄ ▄▄   ▄▄  ▄▄▄  ▄▄▄▄  ▄▄ ▄▄\s |
+                   | ▀▀▀▄▄▄ ██ ██ ██▀▄▀██ ██▀▄▀██ ██▀██ ██▄█▄ ▀███▀\s |
+                   | █████▀ ▀███▀ ██   ██ ██   ██ ██▀██ ██ ██   █  \s |
+                   |=================================================|
+                   |Name: %s                                         |
+                   |-------------------------------------------------|
+                   |Order Number: %d                                 |
+                   |-------------------------------------------------|
+                    """,orderName , orderNumber);
+
+            //Loop through all the Items that were stored inside the item ArrayList
+            for(IMenuItem item: order.getItems()){
+                System.out.println(item.getName() + " - $" + item.getPrice());
+            }
+
+            System.out.println();
+            System.out.printf("Total: $.2f" , order.getTotal());
         }
     }
 
