@@ -2,14 +2,15 @@ package com.pluralsight.ui;
 
 //Import the topping class from another package
 import com.pluralsight.models.*;
+import com.pluralsight.util.ReceiptWriter;
 
 import java.util.Scanner;
 public class UserInterface {
     //Import Scanner for storing users answer
     static Scanner theScanner = new Scanner(System.in);
-    private Order order = new Order();
     //Creating a variable, so I can store things from different methods
     private Sandwich currentSandwich;
+    private Order order;
 
 
     //Menu sign
@@ -82,9 +83,21 @@ public class UserInterface {
     }
 
     public void newOrder() {
+
+        System.out.print("Name for the Order?: ");
+        //eating a line
+        theScanner.nextLine();
+        String orderName = theScanner.nextLine();
+        //Generates a random number for the order number 1-1000
+        int orderNumber = (int)(Math.random() * 1000) + 1;
+
+        //Create a new order
+        order = new Order(orderName, orderNumber);
+
         boolean isRunning = false;
         //Prompt user the menu and store their answer to use to navigate
         while (!isRunning) {
+
             System.out.println("""
                      | =========================================================|
                      |                                                          |
@@ -184,6 +197,12 @@ public class UserInterface {
                     newOrder();
                     break;
             }
+            System.out.println();
+            System.out.println(breadType + " bread added!");
+            if(breadType.equalsIgnoreCase("Lettuce")){
+                System.out.println(breadType + "Wrap added!");
+            }
+            System.out.println();
 
             System.out.println("""
                     
@@ -222,6 +241,9 @@ public class UserInterface {
                     newOrder();
                     break;
             }
+                System.out.println();
+            System.out.println(size + " inch added!");
+            System.out.println();
 
             System.out.println("""
                     
@@ -251,34 +273,39 @@ public class UserInterface {
             switch (toastedChoice) {
                 case 1:
                     isToasted = true;
+                    System.out.println("Toasted!");
                     break;
                 case 2:
                     isToasted = false;
+                    System.out.println("Not Toasted!");
                     break;
                 case 3:
                     newOrder();
                     break;
             }
+            System.out.println();
 
 
 
-            //Create the sandwich
-            currentSandwich = (new Sandwich(breadType, size, isToasted));
 
-            if(currentSandwich == null){
-                System.out.println("Please create a sandwich first.");
-                return;
-            }
 
 
 
             System.out.println("=== Sandwich Confirmation===");
             System.out.println();
+            System.out.println("Is this the correct Bread type, Size, and Toasted? (Y/N)");
             System.out.println(currentSandwich.getName());
+            String usersChoice = theScanner.nextLine();
 
-            order.addSandwich(currentSandwich);
+            if(usersChoice.equalsIgnoreCase("Y")){
+                //Create the sandwich and add all the stored variables into the new sandwich
+                currentSandwich = (new Sandwich(breadType, size, isToasted));
+                order.addSandwich(currentSandwich);
+                return;
+            }else{
+                addSandwich();
+            }
 
-            return;
 
 
         }
@@ -354,6 +381,12 @@ public class UserInterface {
                 case 3:
                     addTopping();
                     break;
+                case 4:
+                    addSauce();
+                    break;
+                default:
+                    System.out.println("Invalid Choice");
+                    return;
             }
         }
     }
@@ -509,6 +542,9 @@ public class UserInterface {
                     System.out.println("Invalid Choice");
                     return;
             }
+
+            System.out.println();
+            System.out.println(chipName + " added!");
             //Instantiate the Chip class, and pass through the users input
             Chip chip = new Chip(chipName);
             order.addChips(chip);
@@ -573,6 +609,9 @@ public class UserInterface {
                     break;
             }
 
+            System.out.println();
+            System.out.println(meatName + " added!");
+
             System.out.println("""
                     
                     |===========================================================|
@@ -597,6 +636,7 @@ public class UserInterface {
             switch (extraMeatChoice) {
                 case 1:
                     extraMeat = true;
+                    System.out.println("Extra Meat Added!");
                     break;
                 case 2:
                     extraMeat = false;
@@ -658,6 +698,8 @@ public class UserInterface {
                     newOrder();
                     break;
             }
+            System.out.println();
+            System.out.println(cheeseName + " added!");
 
             System.out.println("""
                     
@@ -683,6 +725,7 @@ public class UserInterface {
             switch (extraCheeseChoice) {
                 case 1:
                     extraCheese = true;
+                    System.out.println("Extra Cheese is Added!");
                     break;
                 case 2:
                     extraCheese = false;
@@ -690,6 +733,8 @@ public class UserInterface {
                 case 3:
                     newOrder();
             }
+
+            System.out.println(extraCheese);
             //Use the addCheese method to add all the Cheese
             currentSandwich.addCheese(cheeseName, extraCheese);
 
@@ -847,6 +892,8 @@ public class UserInterface {
                     return;
             }
 
+            //Create the Sauce
+            //Add it to the currentSandwich
             Sauce sauce = new Sauce(sauceName, 0.00);
             currentSandwich.addSauce(sauce);
 
@@ -884,8 +931,6 @@ public class UserInterface {
     }
 
     public void checkOut(){
-        boolean isRunning = false;
-        while(!isRunning){
             System.out.println("""
                     
                    |===========================================================================|
@@ -895,10 +940,7 @@ public class UserInterface {
                    | ▀█████ ██ ██ ██▄▄▄ ▀████ ██ ██ ██ ██ ▀██ ▀███▀   ▀████▀ ▀███▀   ██    ▄▄\s |
                    |===========================================================================| 
                 """);
-            System.out.print("Name for the Order?: ");
-            String orderName = theScanner.nextLine();
-            //Generates a random number for the order number 1-1000
-            int orderNumber = ((int) Math.random() * 1000) + 1;
+
 
             System.out.printf("""
                     
@@ -907,11 +949,11 @@ public class UserInterface {
                    | ▀▀▀▄▄▄ ██ ██ ██▀▄▀██ ██▀▄▀██ ██▀██ ██▄█▄ ▀███▀\s |
                    | █████▀ ▀███▀ ██   ██ ██   ██ ██▀██ ██ ██   █  \s |
                    |=================================================|
-                   |Name: %s                                         |
-                   |-------------------------------------------------|
-                   |Order Number: %d                                 |
-                   |-------------------------------------------------|
-                    """,orderName , orderNumber);
+                   |Name: %s                                         
+                   |-------------------------------------------------
+                   |Order Number: %d                                 
+                   |-------------------------------------------------
+                    """, order.getName(), order.getOrderNumber());
 
             //Loop through all the Items that were stored inside the item ArrayList
             for(IMenuItem item: order.getItems()){
@@ -919,8 +961,23 @@ public class UserInterface {
             }
 
             System.out.println();
-            System.out.printf("Total: $.2f" , order.getTotal());
-        }
+            System.out.printf("Total: $%.2f" , order.getTotal());
+            System.out.println();
+            System.out.println("Confirm? Y/N");
+            System.out.println();
+            String userInput = theScanner.nextLine();
+
+            if(userInput.equalsIgnoreCase("Y")){
+                ReceiptWriter receiptWriter = new ReceiptWriter();
+                receiptWriter.saveReceipt(order);
+                System.out.println("Order Save!");
+            }else{
+                System.out.println("Canceling Order");
+                newOrder();
+            }
+
+
+
     }
 
 }

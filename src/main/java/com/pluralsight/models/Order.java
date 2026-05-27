@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+    private String name;
+    private int orderNumber;
 
     //Constructor
-    public Order(){
-
+    public Order(String name, int orderNumber){
+        this.name = name;
+        this.orderNumber = orderNumber;
     }
 
     //Creating a list of MenuItems to hold the orders in
@@ -44,5 +47,15 @@ public class Order {
         return total;
     }
 
+    public int getOrderNumber() {
+        return orderNumber;
+    }
 
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

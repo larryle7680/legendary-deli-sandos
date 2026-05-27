@@ -107,7 +107,7 @@ public class Sandwich implements IMenuItem{
 
     @Override
     public String getName() {
-        return "Size: \n" + size + "Bread: \n" + breadType;
+        return "Size: " + size + "\n" + "Bread: " + breadType + "\n" + "Toasted: " + isToasted;
     }
 
     @Override
