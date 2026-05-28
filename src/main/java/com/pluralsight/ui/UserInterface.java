@@ -54,8 +54,6 @@ public class UserInterface {
                 
                 """);
         System.out.print("Name for the Order?: ");
-        //eating a line
-        theScanner.nextLine();
         String orderName = theScanner.nextLine();
         //Generates a random number for the order number 1-1000
         int orderNumber = (int)(Math.random() * 1000) + 1;
@@ -83,8 +81,7 @@ public class UserInterface {
                     break;
 
                 case 2:
-                    displayUI();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Choice,\n Try Again!");
 
@@ -197,8 +194,7 @@ public class UserInterface {
                     breadType = "Lettuce";
                     break;
                 case 5:
-                    newOrder();
-                    break;
+                  return;
             }
             System.out.println();
 
@@ -243,8 +239,7 @@ public class UserInterface {
                     size = 12;
                     break;
                 case 4:
-                    newOrder();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Input");
                     break;
@@ -367,8 +362,7 @@ public class UserInterface {
                     addSauce();
                     break;
                 case 5:
-                    newOrder();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Choice");
                     break;
@@ -414,14 +408,16 @@ public class UserInterface {
                     drinkName = "Sprite";
                     break;
                 case 3:
-                    drinkName = "Jaritos";
+                    drinkName = "Fanta";
                     break;
                 case 4:
-                    drinkName = "Hi-C Orange";
+                    drinkName = "Jaritos";
                     break;
                 case 5:
-                    newOrder();
+                    drinkName = "Hi-C Orange";
                     break;
+                case 6:
+                    return;
                 default:
                     System.out.println("Invalid Choice");
                     break;
@@ -467,8 +463,7 @@ public class UserInterface {
                     break;
 
                 case 4:
-                    newOrder();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Choice");
                     break;
@@ -533,8 +528,7 @@ public class UserInterface {
                     chipName = "Hot Fries";
                     break;
                 case 6:
-                    newOrder();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Choice");
                     return;
@@ -551,6 +545,12 @@ public class UserInterface {
     }
 
     public void addMeat(){
+        //Make sure to create a sandwich before it crashes
+        if(currentSandwich == null){
+            System.out.println("Please create a sandwich first.");
+            return;
+        }
+
         boolean isRunning = false;
         while(!isRunning){
             System.out.println("""
@@ -602,8 +602,7 @@ public class UserInterface {
                     meatName = "Bacon";
                     break;
                 case 7:
-                    newOrder();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid Choice");
                     break;
@@ -656,6 +655,12 @@ public class UserInterface {
     }
 
     public void addCheese(){
+    //Null check to prevent it from crashing.
+        if(currentSandwich == null){
+            System.out.println("Please create a sandwich first.");
+            return;
+        }
+
         boolean isRunning = false;
         while(!isRunning){
             //Prompt users for cheese
@@ -748,6 +753,13 @@ public class UserInterface {
     }
 
     public void addTopping(){
+
+        //Null check to prevent it from crashing.
+        if(currentSandwich == null){
+            System.out.println("Please create a sandwich first.");
+            return;
+        }
+
         boolean isRunning = false;
         while(!isRunning){
             System.out.println("""
@@ -852,6 +864,14 @@ public class UserInterface {
     }
 
     public void addSauce(){
+
+        //Null check to prevent it from crashing.
+        if(currentSandwich == null){
+            System.out.println("Please create a sandwich first.");
+            return;
+        }
+
+
         boolean isRunning = false;
         while(!isRunning){
             System.out.println("""
@@ -972,7 +992,7 @@ public class UserInterface {
                    |-------------------------------------------------
                    |Order Number: %d                                \s
                    |-------------------------------------------------
-                   \s""", currentOrder.getName(), currentOrder.getOrderNumber());
+                   \s""", currentOrder.getOrderName(), currentOrder.getOrderNumber());
 
             //Loop through all the Items that were stored inside the item ArrayList
         //Loop through all the items inside currentSandwich for confirmation
@@ -1015,6 +1035,7 @@ public class UserInterface {
             System.out.println();
             System.out.println("Confirm? Y/N");
             System.out.println();
+            System.out.print("Your option: ");
             String userInput = theScanner.nextLine();
 
 

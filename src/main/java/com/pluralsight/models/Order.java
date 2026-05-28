@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    private String name;
+    private String orderName;
     private LocalDateTime orderTime;
     //Creating a list of MenuItems to hold the orders in
     private List<IMenuItem> items;
@@ -15,9 +15,9 @@ public class Order {
 
 
     //Constructor
-    public Order(String name, int orderNumber){
+    public Order(String orderName, int orderNumber){
 
-        this.name = name;
+        this.orderName = orderName;
         this.orderTime = LocalDateTime.now();
         this.items  = new ArrayList<>();
         this.orderNumber = orderNumber;
@@ -76,12 +76,9 @@ public class Order {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 
-    public String getName() {
-        return name;
+    public String getOrderName() {
+        return this.orderName;
     }
 
     @Override
@@ -94,7 +91,7 @@ public class Order {
         receiptLayout.append("============\n");
 
         receiptLayout.append("Order Name: ")
-                .append(getName())
+                .append(getOrderName())
                 .append("\n");
 
         receiptLayout.append("Order Number: ")

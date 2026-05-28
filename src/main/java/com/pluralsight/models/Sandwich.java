@@ -111,38 +111,51 @@ public class Sandwich implements IMenuItem{
         return toppings;
     }
 
-    public void setToppings(ArrayList<Topping> toppings) {
-        this.toppings = toppings;
-    }
 
     public ArrayList<Meat> getMeats() {
         return meats;
     }
 
-    public void setMeats(ArrayList<Meat> meats) {
-        this.meats = meats;
-    }
 
     public ArrayList<Cheese> getCheeses() {
         return cheeses;
     }
 
-    public void setCheeses(ArrayList<Cheese> cheeses) {
-        this.cheeses = cheeses;
-    }
 
     public ArrayList<Sauce> getSauces() {
         return sauces;
     }
 
-    public void setSauces(ArrayList<Sauce> sauces) {
-        this.sauces = sauces;
+    @Override
+    public String getName(){
+        //Using a String Builder to append things together
+        StringBuilder sandwichInfo = new StringBuilder();
+
+        sandwichInfo.append(size)
+                .append("\" ")
+                .append(breadType)
+                .append(" Sandwich\n");
+
+        //Loop through the meat and append everything inside the meat ArrayList
+        for(Meat meat : meats){
+            sandwichInfo.append("- ").append(meat.getName()).append("\n").append(meat.getPrice()).append("\n");
+        }
+        //Loop through the Cheese and append everything inside the cheese ArrayList
+        for(Cheese cheese : cheeses){
+            sandwichInfo.append("- ").append(cheese.getName()).append("\n").append(cheese.getPrice()).append("\n");
+        }
+        //Looop through the Toppings and append everything inside the Topping ArrayList
+        for(Topping topping : toppings){
+            sandwichInfo.append("- ").append(topping.getName()).append("\n").append(topping.getPrice()).append("\n");
+        }
+        //Loop through the Sauces and append everything inside the sauces ArrayList
+        for(Sauce sauce : sauces){
+            sandwichInfo.append("- ").append(sauce.getName()).append("\n").append(sauce.getPrice()).append("\n");
+        }
+        //Add everything together
+        return sandwichInfo.toString();
     }
 
-    @Override
-    public String getName() {
-        return "Size: " + size + "\n" + "Bread: " + breadType + "\n" + "Toasted: " + isToasted;
-    }
 
     @Override
     public double getPrice() {
