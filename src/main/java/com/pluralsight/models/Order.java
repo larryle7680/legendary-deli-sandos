@@ -1,20 +1,27 @@
 package com.pluralsight.models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
     private String name;
+    private LocalDateTime orderTime;
+    //Creating a list of MenuItems to hold the orders in
+    private List<IMenuItem> items;
     private int orderNumber;
+
 
     //Constructor
     public Order(String name, int orderNumber){
+
         this.name = name;
+        this.orderTime = LocalDateTime.now();
+        this.items  = new ArrayList<>();
         this.orderNumber = orderNumber;
     }
-
-    //Creating a list of MenuItems to hold the orders in
-    private List<IMenuItem> items = new ArrayList<>();
 
     //To get all the items that are stored inside items
     public List<IMenuItem> getItems() {
@@ -47,6 +54,24 @@ public class Order {
         return total;
     }
 
+    public String receiptName(){
+
+
+        //Using a dateTimeFormatter to format to the correct date.
+        DateTimeFormatter timeStamp = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+
+        //Creating the FileName, so it can generate the timeStamp on the fileName
+//        String fileName = timeStamp + "-" + order.getOrderNumber() +".txt";
+
+        return orderTime.format(timeStamp);
+    }
+
+    public String getFormattedOrderTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+
+        return orderTime.format(formatter);
+    }
+
     public int getOrderNumber() {
         return orderNumber;
     }
@@ -57,5 +82,42 @@ public class Order {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString(){
+
+        StringBuilder receiptLayout = new StringBuilder();
+
+        receiptLayout.append("============\n");
+        receiptLayout.append("Legendary Receipt\n");
+        receiptLayout.append("============\n");
+
+        receiptLayout.append("Order Name: ")
+                .append(getName())
+                .append("\n");
+
+        receiptLayout.append("Order Number: ")
+                .append(getOrderNumber())
+                .append("\n");
+
+        receiptLayout.append("\nItems:\n");
+
+        for(int i = 0; i < items.size(); i++){
+
+            IMenuItem item = items.get(i);
+
+            receiptLayout.append(i + 1)
+                    .append(". ")
+                    .append(item.getName())
+                    .append(", $")
+                    .append(String.format("%.2f", item.getPrice()))
+                    .append("\n");
+        }
+
+        receiptLayout.append("\nTotal: $")
+                .append(String.format("%.2f", getTotal()));
+
+        return receiptLayout.toString();
     }
 }

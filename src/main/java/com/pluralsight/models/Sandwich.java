@@ -17,7 +17,6 @@ public class Sandwich implements IMenuItem{
     private ArrayList<Sauce> sauces = new ArrayList<>();
 
     //Constructor
-
     public Sandwich(String breadType, int size, boolean isToasted) {
         this.size = size;
         this.breadType = breadType;
@@ -103,6 +102,41 @@ public class Sandwich implements IMenuItem{
         }
         cheeses.add(new Cheese(cheese,price));
 
+    }
+
+    //Get getters to print it out of the confirmation list
+
+
+    public ArrayList<Topping> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(ArrayList<Topping> toppings) {
+        this.toppings = toppings;
+    }
+
+    public ArrayList<Meat> getMeats() {
+        return meats;
+    }
+
+    public void setMeats(ArrayList<Meat> meats) {
+        this.meats = meats;
+    }
+
+    public ArrayList<Cheese> getCheeses() {
+        return cheeses;
+    }
+
+    public void setCheeses(ArrayList<Cheese> cheeses) {
+        this.cheeses = cheeses;
+    }
+
+    public ArrayList<Sauce> getSauces() {
+        return sauces;
+    }
+
+    public void setSauces(ArrayList<Sauce> sauces) {
+        this.sauces = sauces;
     }
 
     @Override
