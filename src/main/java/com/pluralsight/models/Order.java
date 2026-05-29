@@ -99,71 +99,76 @@ public class Order {
                 .append("\n");
 
         receipt.append("=====================\n\n");
-        //Loop through items to find item name and its value
+    //Loop through items to getName and getPrices to display to the user
         for (IMenuItem item : items) {
-
-            receipt.append(item.getName())
-                    .append(" - $")
-                    .append(String.format("%.2f", item.getPrice()))
-                    .append("\n");
-
-            //Loop through Item but has an instance of sandwich to grab all the ingredients
-            //to display name and price
+            //using instanceof because the sandwich class is inside IMenuItem ArrayList to access
+            //The ingredients that is stored into the sandwich class
             if (item instanceof Sandwich sandwich) {
 
+                receipt.append("Sandwich - $")
+                        .append(String.format("%.2f", sandwich.getPrice()))
+                        .append("\n");
+
+                receipt.append(sandwich.getName()).append("\n");
+                //getName and getPrice for meats
                 receipt.append("  Meats:\n");
                 for (Meat meat : sandwich.getMeats()) {
                     receipt.append("    - ")
-                            .append(meat.getName()).append(" $").append(meat.getPrice())
+                            .append(meat.getName())
+                            .append(" $")
+                            .append(String.format("%.2f", meat.getPrice()))
                             .append("\n");
                 }
-
+                //getName and getPrice for cheeses
                 receipt.append("  Cheeses:\n");
                 for (Cheese cheese : sandwich.getCheeses()) {
                     receipt.append("    - ")
-                            .append(cheese.getName()).append(" $").append(cheese.getPrice())
+                            .append(cheese.getName())
+                            .append(" $")
+                            .append(String.format("%.2f", cheese.getPrice()))
                             .append("\n");
                 }
-
+                //getName and getPrice for toppings
                 receipt.append("  Toppings:\n");
                 for (Topping topping : sandwich.getToppings()) {
                     receipt.append("    - ")
-                            .append(topping.getName()).append(" $").append(topping.getPrice())
+                            .append(topping.getName())
+                            .append(" $")
+                            .append(String.format("%.2f", topping.getPrice()))
                             .append("\n");
                 }
-
+                //getName and getPrice for sauce
                 receipt.append("  Sauces:\n");
                 for (Sauce sauce : sandwich.getSauces()) {
                     receipt.append("    - ")
                             .append(sauce.getName())
                             .append(" $")
-                            .append(sauce.getPrice())
+                            .append(String.format("%.2f", sauce.getPrice()))
                             .append("\n");
                 }
 
-            }//Grab the instance of Drink off of items to display name and its price
-            if (item instanceof Drink drink) {
+                receipt.append("\n");
+            }
+            //Use instance of to access Drink class from IMenuItem arrayList that holds my items
+            else if (item instanceof Drink drink) {
                 receipt.append("Drink: ")
                         .append(drink.getName())
                         .append(" $")
                         .append(String.format("%.2f", drink.getPrice()))
                         .append("\n");
-
-
-            }//Grab the instance of Chips off the items as well to display name and price
-            if(item instanceof Chip chip){
+            }
+            //Use instance of to access chips from IMenuItem ArrayList that holds my items
+            else if (item instanceof Chip chip) {
                 receipt.append("Chips: ")
                         .append(chip.getName())
                         .append(" $")
-                        .append(String.format("$%.2f", chip.getPrice()))
+                        .append(String.format("%.2f", chip.getPrice()))
                         .append("\n");
             }
-            receipt.append("\n");
-            //Display total of everything
-            receipt.append("Total: $")
-                    .append(String.format("%.2f", getTotal()));
-
         }
+        //Print out total from everything
+        receipt.append("\nTotal: $")
+                .append(String.format("%.2f", getTotal()));
 
         return receipt.toString();
     }
