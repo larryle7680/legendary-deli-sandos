@@ -57,7 +57,7 @@ public class UserInterface {
 
         //Edge case for wrong data type
         while(theScanner.hasNextInt()){
-            System.out.println("Enter your name!");
+            System.out.println("Numbers don't work! \n Enter your name!");
             theScanner.nextLine();
         }
         String orderName = theScanner.nextLine();
