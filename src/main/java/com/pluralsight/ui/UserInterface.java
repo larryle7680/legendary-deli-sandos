@@ -968,92 +968,44 @@ public class UserInterface {
         }
     }
 
-    public void checkOut(){
+    public void checkOut() {
 
-        theScanner.nextLine();
-        ReceiptWriter receiptWriter = new ReceiptWriter();
+            theScanner.nextLine();
+
+            if (currentOrder == null || currentOrder.getItems().isEmpty()) {
+                System.out.println("Your order is empty.");
+                return;
+            }
+
+            ReceiptWriter receiptWriter = new ReceiptWriter();
+
             System.out.println("""
-                   \s
-                   |===========================================================================|
-                   |                                                                       ▄▄\s |
-                   | ▄█████ ▄▄ ▄▄ ▄▄▄▄▄  ▄▄▄▄ ▄▄ ▄▄ ▄▄ ▄▄  ▄▄  ▄▄▄▄   ▄████▄ ▄▄ ▄▄ ▄▄▄▄▄▄  ██\s |
-                   | ██     ██▄██ ██▄▄  ██▀▀▀ ██▄█▀ ██ ███▄██ ██ ▄▄   ██  ██ ██ ██   ██    ██\s |
-                   | ▀█████ ██ ██ ██▄▄▄ ▀████ ██ ██ ██ ██ ▀██ ▀███▀   ▀████▀ ▀███▀   ██    ▄▄\s |
-                   |===========================================================================|\s
-               \s""");
+                    |===========================================================================|
+                    |                              CHECKING OUT!                                |
+                    |===========================================================================|
+                    """);
 
-
-            System.out.printf("""
-                   \s
-                   |=================================================|\s
-                   | ▄█████ ▄▄ ▄▄ ▄▄   ▄▄ ▄▄   ▄▄  ▄▄▄  ▄▄▄▄  ▄▄ ▄▄\s |
-                   | ▀▀▀▄▄▄ ██ ██ ██▀▄▀██ ██▀▄▀██ ██▀██ ██▄█▄ ▀███▀\s |
-                   | █████▀ ▀███▀ ██   ██ ██   ██ ██▀██ ██ ██   █  \s |
-                   |=================================================|
-                   |Name: %s                                        \s
-                   |-------------------------------------------------
-                   |Order Number: %d                                \s
-                   |-------------------------------------------------
-                   \s""", currentOrder.getOrderName(), currentOrder.getOrderNumber());
-
-            //Loop through all the Items that were stored inside the item ArrayList
-        //Loop through all the items inside currentSandwich for confirmation
-            for(IMenuItem item: currentOrder.getItems()){
-                System.out.println(item.getName() + " - $" + item.getPrice());
-            }
-
-        System.out.println("Meats: ");
-            for(Meat meat : currentSandwich.getMeats()){
-                System.out.println("-" + meat.getName() +  " " + meat.getPrice());
-            }
+            System.out.println(currentOrder);
             System.out.println();
 
-        System.out.println("Cheese: ");
-            for(Cheese cheese : currentSandwich.getCheeses()){
-                System.out.println("-" + cheese.getName() + " " + cheese.getPrice());
-
-            }
             System.out.println();
-        System.out.println("Topping: ");
-            for(Topping topping : currentSandwich.getToppings()){
-                System.out.println("-" + topping.getName() + " " + topping.getPrice());
+            System.out.print("Confirm? Y/N: ");
 
-            }
-            System.out.println();
-
-        System.out.println("Sauces");
-            for(Sauce sauce : currentSandwich.getSauces()){
-                System.out.println("-" + sauce.getName() + " " + sauce.getPrice());
-
-            }
-
-        System.out.println("Beverage");
-            for(IMenuItem drink : currentOrder.getItems()){
-                System.out.println("-" + drink.getName() + " " + drink.getPrice());
-            }
-            System.out.println();
-
-
-
-            System.out.println();
-            System.out.printf("Total: $%.2f" , currentOrder.getTotal());
-            System.out.println();
-            System.out.println("Confirm? Y/N");
-            System.out.println();
-            System.out.print("Your option: ");
             String userInput = theScanner.nextLine();
 
-
-            if(userInput.equalsIgnoreCase("Y")){
+            if (userInput.equalsIgnoreCase("Y")) {
                 receiptWriter.saveReceipt(currentOrder);
-                System.out.println("Order Save!");
-            }else if(userInput.equalsIgnoreCase("N")){
-                System.out.println("Canceling Order");
-                newOrder();
+                System.out.println("Order Saved!");
+                return;
             }
 
+            if (userInput.equalsIgnoreCase("N")) {
+                System.out.println("Canceling Order");
+                newOrder();
+                return;
+            }
 
-
+            System.out.println("Invalid choice.");
 
     }
 
