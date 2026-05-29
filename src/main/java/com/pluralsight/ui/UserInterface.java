@@ -322,6 +322,8 @@ public class UserInterface {
 
 
 
+
+
     public void promptTopping(){
         boolean isRunning = false;
         while(!isRunning){
@@ -1000,31 +1002,34 @@ public class UserInterface {
                 System.out.println(item.getName() + " - $" + item.getPrice());
             }
 
-            System.out.println("Meat:");
+        System.out.println("Meats: ");
             for(Meat meat : currentSandwich.getMeats()){
-                System.out.println("Meat: " + meat.getName());
-                System.out.println("Price:" + meat.getPrice());
+                System.out.println("-" + meat.getName() +  " " + meat.getPrice());
             }
             System.out.println();
 
-            System.out.println("Cheese: ");
+        System.out.println("Cheese: ");
             for(Cheese cheese : currentSandwich.getCheeses()){
-                System.out.println("Cheese: " + cheese.getName());
-                System.out.println("Price: " + cheese.getPrice());
+                System.out.println("-" + cheese.getName() + " " + cheese.getPrice());
+
             }
             System.out.println();
-
-            System.out.println("Topping: ");
+        System.out.println("Topping: ");
             for(Topping topping : currentSandwich.getToppings()){
-                System.out.println("Topping: " + topping.getName());
-                System.out.println("Price: " + topping.getPrice());
+                System.out.println("-" + topping.getName() + " " + topping.getPrice());
+
             }
             System.out.println();
 
-            System.out.println("Sauce: ");
+        System.out.println("Sauces");
             for(Sauce sauce : currentSandwich.getSauces()){
-                System.out.println("Sauce: " + sauce.getName());
-                System.out.println("Price: " + sauce.getPrice());
+                System.out.println("-" + sauce.getName() + " " + sauce.getPrice());
+
+            }
+
+        System.out.println("Beverage");
+            for(IMenuItem drink : currentOrder.getItems()){
+                System.out.println("-" + drink.getName() + " " + drink.getPrice());
             }
             System.out.println();
 

@@ -134,23 +134,23 @@ public class Sandwich implements IMenuItem{
         sandwichInfo.append(size)
                 .append("\" ")
                 .append(breadType)
-                .append(" Sandwich\n");
+                .append(" Sandwich");
 
         //Loop through the meat and append everything inside the meat ArrayList
         for(Meat meat : meats){
-            sandwichInfo.append("- ").append(meat.getName()).append("\n").append(meat.getPrice()).append("\n");
+            sandwichInfo.append("\n - ").append(meat.getName()).append(" Price: ").append(meat.getPrice());
         }
         //Loop through the Cheese and append everything inside the cheese ArrayList
         for(Cheese cheese : cheeses){
-            sandwichInfo.append("- ").append(cheese.getName()).append("\n").append(cheese.getPrice()).append("\n");
+            sandwichInfo.append("\n- ").append(cheese.getName()).append(" Price: ").append(cheese.getPrice());
         }
-        //Looop through the Toppings and append everything inside the Topping ArrayList
+        //Loop through the Toppings and append everything inside the Topping ArrayList
         for(Topping topping : toppings){
-            sandwichInfo.append("- ").append(topping.getName()).append("\n").append(topping.getPrice()).append("\n");
+            sandwichInfo.append("\n- ").append(topping.getName()).append(" Price: ").append(topping.getPrice());
         }
         //Loop through the Sauces and append everything inside the sauces ArrayList
-        for(Sauce sauce : sauces){
-            sandwichInfo.append("- ").append(sauce.getName()).append("\n").append(sauce.getPrice()).append("\n");
+        for(Sauce sauce : sauces) {
+            sandwichInfo.append("\n- ").append(sauce.getName()).append(" Price: ").append(sauce.getPrice());
         }
         //Add everything together
         return sandwichInfo.toString();

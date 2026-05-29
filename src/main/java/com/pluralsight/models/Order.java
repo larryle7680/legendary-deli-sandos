@@ -1,5 +1,6 @@
 package com.pluralsight.models;
 
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Order {
     }
 
     //Add everything together for the get total
-    public double getTotal(){
+     public double getTotal(){
         //Start stream to loop through the items, then .map it to double
         //Use method reference getPrice through the interface
         //.sum to add it all together
@@ -52,9 +53,8 @@ public class Order {
                 .mapToDouble(IMenuItem::getPrice)
                 .sum();
         return total;
-    }
-
-    public String receiptName(){
+        }
+        public String receiptName(){
 
 
         //Using a dateTimeFormatter to format to the correct date.
@@ -64,57 +64,111 @@ public class Order {
 //        String fileName = timeStamp + "-" + order.getOrderNumber() +".txt";
 
         return orderTime.format(timeStamp);
-    }
+        }
 
-    public String getFormattedOrderTime(){
+        public String getFormattedOrderTime(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
 
         return orderTime.format(formatter);
-    }
+        }
 
-    public int getOrderNumber() {
+        public int getOrderNumber() {
         return orderNumber;
-    }
+        }
 
 
-    public String getOrderName() {
+        public String getOrderName() {
         return this.orderName;
-    }
+        }
 
     @Override
-    public String toString(){
+    public String toString() {
 
-        StringBuilder receiptLayout = new StringBuilder();
-
-        receiptLayout.append("============\n");
-        receiptLayout.append("Legendary Receipt\n");
-        receiptLayout.append("============\n");
-
-        receiptLayout.append("Order Name: ")
+        StringBuilder receipt = new StringBuilder();
+        //Header
+        receipt.append("=====================\n");
+        receipt.append("Legendary Receipt\n");
+        receipt.append("=====================\n");
+        //Order Name
+        receipt.append("Order Name: ")
                 .append(getOrderName())
                 .append("\n");
-
-        receiptLayout.append("Order Number: ")
+        //Order Number
+        receipt.append("Order Number: ")
                 .append(getOrderNumber())
                 .append("\n");
 
-        receiptLayout.append("\nItems:\n");
+        receipt.append("=====================\n\n");
+        //Loop through items to find item name and its value
+        for (IMenuItem item : items) {
 
-        for(int i = 0; i < items.size(); i++){
-
-            IMenuItem item = items.get(i);
-
-            receiptLayout.append(i + 1)
-                    .append(". ")
-                    .append(item.getName())
-                    .append(", $")
+            receipt.append(item.getName())
+                    .append(" - $")
                     .append(String.format("%.2f", item.getPrice()))
                     .append("\n");
+
+            //Loop through Item but has an instance of sandwich to grab all the ingredients
+            //to display name and price
+            if (item instanceof Sandwich sandwich) {
+
+                receipt.append("  Meats:\n");
+                for (Meat meat : sandwich.getMeats()) {
+                    receipt.append("    - ")
+                            .append(meat.getName()).append(" $").append(meat.getPrice())
+                            .append("\n");
+                }
+
+                receipt.append("  Cheeses:\n");
+                for (Cheese cheese : sandwich.getCheeses()) {
+                    receipt.append("    - ")
+                            .append(cheese.getName()).append(" $").append(cheese.getPrice())
+                            .append("\n");
+                }
+
+                receipt.append("  Toppings:\n");
+                for (Topping topping : sandwich.getToppings()) {
+                    receipt.append("    - ")
+                            .append(topping.getName()).append(" $").append(topping.getPrice())
+                            .append("\n");
+                }
+
+                receipt.append("  Sauces:\n");
+                for (Sauce sauce : sandwich.getSauces()) {
+                    receipt.append("    - ")
+                            .append(sauce.getName())
+                            .append(" $")
+                            .append(sauce.getPrice())
+                            .append("\n");
+                }
+
+            }//Grab the instance of Drink off of items to display name and its price
+            if (item instanceof Drink drink) {
+                receipt.append("Drink: ")
+                        .append(drink.getName())
+                        .append(" $")
+                        .append(String.format("%.2f", drink.getPrice()))
+                        .append("\n");
+
+
+            }//Grab the instance of Chips off the items as well to display name and price
+            if(item instanceof Chip chip){
+                receipt.append("Chips: ")
+                        .append(chip.getName())
+                        .append(" $")
+                        .append(String.format("$%.2f", chip.getPrice()))
+                        .append("\n");
+            }
+            receipt.append("\n");
+            //Display total of everything
+            receipt.append("Total: $")
+                    .append(String.format("%.2f", getTotal()));
+
         }
 
-        receiptLayout.append("\nTotal: $")
-                .append(String.format("%.2f", getTotal()));
-
-        return receiptLayout.toString();
+        return receipt.toString();
     }
 }
+
+
+
+
