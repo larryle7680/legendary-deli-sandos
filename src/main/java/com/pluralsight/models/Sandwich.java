@@ -56,6 +56,10 @@ public class Sandwich implements IMenuItem{
         toppings.add(topping);
     }
 
+    public boolean isToasted() {
+        return isToasted;
+    }
+
     public void addMeat(String meat, boolean extraMeat) {
         //Starting price and it'll change depending on size
         double price = 0.00;

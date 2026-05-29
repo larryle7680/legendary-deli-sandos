@@ -107,7 +107,9 @@ public class Order {
 
                 receipt.append("Sandwich - $")
                         .append(String.format("%.2f", sandwich.getPrice()))
-                        .append("\n");
+                        .append("\n")
+                                .append("Toasted: ")
+                                        .append(sandwich.isToasted());
 
                 receipt.append(sandwich.getName()).append("\n");
                 //getName and getPrice for meats

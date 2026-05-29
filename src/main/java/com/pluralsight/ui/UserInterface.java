@@ -302,6 +302,7 @@ public class UserInterface {
             System.out.println();
             System.out.println("Is this the correct Bread type, Size, and Toasted? (Y/N)");
             System.out.println(currentSandwich.getName());
+            System.out.println("Toasted: " + currentSandwich.isToasted());
 
            //Eat the line
             theScanner.nextLine();
@@ -972,11 +973,12 @@ public class UserInterface {
 
             theScanner.nextLine();
 
+            //Edge case if the current order is empty or there isn't any items, it'll return me to the menu.
             if (currentOrder == null || currentOrder.getItems().isEmpty()) {
                 System.out.println("Your order is empty.");
                 return;
             }
-
+            //Need to instantiate the receiptWriter to use it.
             ReceiptWriter receiptWriter = new ReceiptWriter();
 
             System.out.println("""
@@ -985,12 +987,15 @@ public class UserInterface {
                     |===========================================================================|
                     """);
 
+            //Got rid of looping through multiple ArrayList,
+            // this makes more sense to loop through the currentOrder
             System.out.println(currentOrder);
             System.out.println();
 
             System.out.println();
+            //Prompt if their order is correct
             System.out.print("Confirm? Y/N: ");
-
+            //Store their input to either save or discard
             String userInput = theScanner.nextLine();
 
             if (userInput.equalsIgnoreCase("Y")) {
@@ -1001,7 +1006,13 @@ public class UserInterface {
 
             if (userInput.equalsIgnoreCase("N")) {
                 System.out.println("Canceling Order");
-                newOrder();
+
+                //remove the order in totality
+                currentOrder = null;
+                currentSandwich = null;
+
+                //Go back the start
+                displayUI();
                 return;
             }
 
