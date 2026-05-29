@@ -54,6 +54,12 @@ public class UserInterface {
                 
                 """);
         System.out.print("Name for the Order?: ");
+
+        //Edge case for wrong data type
+        while(theScanner.hasNextInt()){
+            System.out.println("Enter your name!");
+            theScanner.nextLine();
+        }
         String orderName = theScanner.nextLine();
         //Generates a random number for the order number 1-1000
         int orderNumber = (int)(Math.random() * 1000) + 1;
@@ -237,6 +243,8 @@ public class UserInterface {
                     break;
                 case 3:
                     size = 12;
+                    System.out.println("Big Back");
+                    System.out.println();
                     break;
                 case 4:
                     return;
@@ -463,6 +471,8 @@ public class UserInterface {
 
                 case 3:
                     drinkSize = "Large";
+                    System.out.println("0_0");
+                    System.out.println();
                     break;
 
                 case 4:
@@ -639,6 +649,7 @@ public class UserInterface {
                 case 1:
                     extraMeat = true;
                     System.out.println("Extra Meat Added!");
+                    System.out.println("Pause");
                     break;
                 case 2:
                     extraMeat = false;
